@@ -19,6 +19,18 @@ class Api::FactsController < ApplicationController
     render json: @fact
   end
 
+  def update
+    if(@fact.save)
+      render json: @fact
+    else
+      render json: {errors: @fact.errors.full_messages}, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    render json: @fact.destroy
+  end
+
   private
 
   def fact_params
