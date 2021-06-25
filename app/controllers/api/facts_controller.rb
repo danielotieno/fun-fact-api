@@ -6,6 +6,15 @@ class Api::FactsController < ApplicationController
     render json: Fact.all
   end
 
+  def create
+    @fact = Fact.new(fact_params)
+    if(@fact.save)
+      render json: @fact
+    else
+      render json: {errors: @fact.errors.full_messages}, status: :unprocessable_entity
+    end
+  end
+
   def show
     render json: @fact
   end
