@@ -6,7 +6,15 @@ class Api::FactsController < ApplicationController
     render json: Fact.all
   end
 
+  def show
+    render json: @fact
+  end
+
   private
+
+  def fact_params
+    params.require(:fact).permit(:text, :stars, :username, :source)
+  end
 
   def set_fact
     @fact = Fact.find(params[:id])
